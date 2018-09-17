@@ -1,2 +1,6 @@
-# javascript-5.1-book
-javascript知识讲解
+# javascript文档
+
+* 作者：梁锐(lero)
+* QQ : 125836941
+
+2018-09-17：初始化更新
