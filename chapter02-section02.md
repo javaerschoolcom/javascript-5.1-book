@@ -12,8 +12,35 @@
   * ``boolean``布尔:true(真)|false(假)
 * 复合类型：往往是多个原始类型的值的合成，可以看作是一个存放各种值的容器
   * ``object``对象:包含狭义的对象``object``+数组``array``+函数``function``
-* 特殊值：有特殊含义
+* 特殊值：设计者对特殊情况采用的设计
   * ``undefined``:变量定义没有初始化，表示未知
   * ``null``:表示没有，表示空的空间
 
-##### 如何去鉴别数据的类型
+##### 三种方法鉴别数据类型
+
+* `typeof`运算符,对原始类型和特殊值鉴别没什问题，但对于对象的鉴别不够细粒度
+
+```javascript
+typeof 111  // "number"
+typeof 'abc' // "string"
+typeof true // "boolean"
+function f() {}
+typeof f   // "function"
+typeof undefined  // "undefined"
+typeof {} // "object"
+typeof [] // "object"
+typeof null // "object"
+```
+
+* `instanceof`运算符,是对typeof的补充，能够进一步细粒度鉴别对象
+
+```javascript
+var obj = {};
+var arr = [];
+
+obj instanceof Array // false
+arr instanceof Array // true
+```
+
+* `Object.prototype.toString`函数
+

@@ -7,3 +7,5 @@
    * JavaScript数据类型之布尔
    * JavaScript数据类型之对象
    * JavaScript数据类型之函数
+   * JavaScript运算符之算术运算符
+   * JavaScript运算符之关系运算符

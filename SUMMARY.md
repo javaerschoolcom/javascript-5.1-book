@@ -15,3 +15,6 @@
     * [第008讲 数据类型之对象](chapter02-section05.md)
     * [第009讲 数据类型之函数](chapter02-section06.md)
     * [第010讲 数据类型之数组](chapter02-section07.md)
+    * [第011讲 数据类型转换](chapter02-section09.md)
+    * [第012讲 运算符之算术运算符](chapter02-section10.md)
+    * [第013讲 运算符之关系运算符](chapter02-section11.md)
