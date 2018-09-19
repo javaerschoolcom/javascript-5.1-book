@@ -18,3 +18,7 @@
     * [第011讲 数据类型转换](chapter02-section09.md)
     * [第012讲 运算符之算术运算符](chapter02-section10.md)
     * [第013讲 运算符之关系运算符](chapter02-section11.md)
+    * [第014讲 运算符之逻辑运算符](chapter02-section12.md)
+    * [第015讲 运算符之位运算符](chapter02-section13.md)
+    * [第016讲 运算符之赋值运算符](chapter02-section14.md)
+    * [第017讲 流程控制](chapter02-section15.md)

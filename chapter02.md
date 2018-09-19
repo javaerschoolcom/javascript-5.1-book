@@ -9,3 +9,7 @@
    * JavaScript数据类型之函数
    * JavaScript运算符之算术运算符
    * JavaScript运算符之关系运算符
+   * JavaScript运算符之逻辑运算符
+   * JavaScript运算符之位运算符
+   * JavaScript运算符之赋值运算符
+   * JavaScript流程控制
