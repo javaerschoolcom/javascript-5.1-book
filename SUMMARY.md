@@ -22,3 +22,5 @@
     * [第015讲 运算符之位运算符](chapter02-section13.md)
     * [第016讲 运算符之赋值运算符](chapter02-section14.md)
     * [第017讲 流程控制](chapter02-section15.md)
+* [第三章 JavaScript语法](chapter03.md)
+    * [第018讲 Array](chapter03-section01.md)
