@@ -24,3 +24,5 @@
     * [第017讲 流程控制](chapter02-section15.md)
 * [第三章 JavaScript语法](chapter03.md)
     * [第018讲 Array](chapter03-section01.md)
+    * [第019讲 String](chapter03-section02.md)
+    * [第020讲 Math](chapter03-section03.md)

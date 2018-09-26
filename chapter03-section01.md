@@ -73,7 +73,7 @@ arr.slice(); //["a","b","c","d","e"]  如果不传递参数，相当于拷贝数
 //基本操作
 arr=["a","b","c","d","e"];
 arr.splice(1,2,"hello","world") //["b","c"];
-arr //['a',"hello","world"]
+arr //['a',"hello","world","d","e"]
 
 //有点类似于slice操作
 var arr=["a","b","c","d","e"];
