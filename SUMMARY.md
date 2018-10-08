@@ -26,3 +26,8 @@
     * [第018讲 Array](chapter03-section01.md)
     * [第019讲 String](chapter03-section02.md)
     * [第020讲 Math](chapter03-section03.md)
+    * [第021讲 JSON](chapter03-section04.md)
+    * [第022讲 RegExp](chapter03-section05.md)
+* [第四章 DOM文档对象模型](chapter04.md)
+    * [第023讲 DOM概述](chapter04-section01.md)
+    * [第025讲 Element节点](chapter04-section03.md)
