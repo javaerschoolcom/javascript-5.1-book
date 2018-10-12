@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM&BOM综合练习</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        ul{
+            list-style: none;
+
+        }
+        #menu li{
+
+            margin: 10px 0;
+        }
+        #menu a{
+            color: #fff;
+        }
+        #nav li{
+            float: left;
+            margin-left: 20px;
+        }
+
+        .nav-item{
+            background-color: red;
+            margin: 10px 0;
+        }
+        .content{
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="background-color: darkcyan;color: #fff;">
+            <div style="text-align: center;height: 65px;line-height: 65px"><span class="label label-default">后台管理系统</span></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2" style="min-height: 800px;background-color: darkorchid">
+            <ul id="menu">
+                <li><a href="#">菜单1</a></li>
+                <li><a href="#">菜单2</a></li>
+                <li><a href="#">菜单3</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10" style="min-height: 800px;background-color: darkgray;" >
+              <div style="background-color: darkblue;margin: 0 -15px;">
+                  <ul id="nav" style="display: block;overflow: hidden; margin-left: -40px;">
+                    <!--  <Li class="nav-item">菜单1<img src="a.png"></Li>
+                      <Li class="nav-item">菜单2<img src="a.png"></Li>
+-->
+                  </ul>
+              </div>
+
+                <div id="content0" class="content">内容1</div>
+                <div id="content1" class="content">内容2</div>
+                <div id="content2" class="content">内容3</div>
+
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12" style="background-color: darkolivegreen">
+            <div style="text-align: center;height: 80px;line-height: 80px"><span class="label label-default">&copy;展谊科技</span></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+      function $(id){ return  document.getElementById(id)};
+
+      var menu =$("menu");
+
+      var menuItem=menu.getElementsByTagName("li");
+
+      var nav =$("nav");
+
+      var navItem= nav.getElementsByTagName("li");
+
+
+
+      for(var i=0;i<menuItem.length;i++){
+
+          (function(i){
+              var num =i;
+              menuItem[i].onclick=function(){
+                  var li = document.createElement("li");
+                  li.id=i;
+                  li.setAttribute("class","nav-item");
+                  li.innerHTML=this.textContent+"<img src='m.png'>";
+                  nav.appendChild(li);
+                  hideAllNav(document.getElementsByClassName("content"));
+                  //console.log("content"+num);
+                  $("content"+num).style.display="block";
+              }
+          })(i);
+      }
+
+
+      function hideAllNav(navItem){
+          for(var i=0;i<navItem.length;i++){
+              navItem[i].style.display="none";
+          }
+      }
+
+
+
+
+
+</script>
+
+</body>
+</html>

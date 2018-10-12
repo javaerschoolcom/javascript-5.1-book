@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小游戏</title>
+    <style>
+
+    /**
+       * 1.生成26个字母
+       * 2.随机在起始位置水平位置随机生成
+       * 3.生成完成后，就下落
+       * 4.下落中，通过keyup事件消除对应的字母，消除加分
+       * 5.字母若未消除，超过边界，就消失，扣分
+       * 6.开始游戏，暂停游戏，设置难度
+       * 7.数据类型，字符串，Math,定时器,尺寸,事件,DOM操作,数组,
+       */
+
+        body{
+                background-image: url("game/map.png");
+                background-repeat: no-repeat;
+            }
+
+        #pauseOrContinueGame{
+              width: 50px;
+              position: absolute;
+              bottom: 170px;
+              left: 80px;
+        }
+
+        ul{
+            list-style: none;
+            width: 100px;
+            background-color: darkcyan;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 10px;
+            display: none;
+            position: absolute;
+        }
+        li{
+            margin: 10px 0;
+
+        }
+        li:hover{
+            color: #5751a4;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<img id="pauseOrContinueGame"  src="game/pauseGame.png"></img>
+
+<ul id="menu">
+    <Li>暂停游戏</Li>
+    <Li>继续游戏</Li>
+</ul>
+
+
+<script>
+
+    window.onload=function () {
+        var count=0;//得分数
+        var arrWords=[];//页面中字母
+        var pauseOrContinueGameFlag=false; //暂停游戏
+        caleScoreWood();//计分板
+        //生成字母定时器
+        var globleTimer=setInterval(function(){
+            document.body.appendChild(bornNode());
+        },500);
+
+     function bornWord(){
+          var words="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          return words.charAt(Math.floor(Math.random()*26));
+     }
+
+     function bornNode(){
+          var word= bornWord();
+          var img =document.createElement("img");
+          img.src='game/'+word+".png";
+          img.word=word;//存储对比的字母值
+          img.style.height=50+"px";
+          img.style.position="absolute";//定位目的，让它动起来
+          img.style.top=0+"px";
+          img.style.left=Math.random()*(document.documentElement.clientWidth-img.offsetWidth-40)+"px";
+          img.id=setInterval(function(img){
+             var nextTop=parseInt(img.style.top);
+             if(document.documentElement.clientHeight-img.offsetTop<=img.offsetHeight+20){
+                 clearInterval(img.id);//清除定时器
+                 arrWords.shift();//移出不在页面中的字母
+                 document.body.removeChild(img);
+                 //扣分
+                 if(count<0){
+                     console.log("游戏结束");
+
+                 }else{
+                     count-=20;
+                     document.getElementById("caleScore").innerHTML=count+"分";
+                 }
+             }
+             img.style.top=(nextTop+10)+"px";
+         },100,img);
+         arrWords.push(img);//存页面中的字母
+         return img;
+     }
+
+     //消除字母
+     document.addEventListener("keyup",function(e){
+         var  keyword= e.key.toUpperCase();//记录键盘按的键
+         for(var i=0;i<arrWords.length;i++){
+             if(arrWords[i].word===keyword){
+                 var  removeNode= arrWords.splice(i,1);
+                 //加分
+                 count+=10;
+                 document.getElementById("caleScore").innerHTML=count+"分";
+                 var  word= removeNode[0];
+                 clearInterval(word.id);
+                 document.body.removeChild(word);
+                 break;
+             }
+         }
+     },false);
+
+     //暂停游戏
+     document.getElementById("pauseOrContinueGame").addEventListener("click",function () {
+         if(!pauseOrContinueGameFlag){
+             clearInterval(globleTimer);
+             for(var i=0;i<arrWords.length;i++){
+                 clearInterval(arrWords[i].id);
+             }
+             this.src="game/continueGame.png";
+         }else{
+             globleTimer=setInterval(function(){
+                 document.body.appendChild(bornNode());
+             },500);
+
+             for(var i=0;i<arrWords.length;i++){
+                 arrWords[i].id=setInterval(function(img){
+                     var nextTop=parseInt(img.style.top);
+                     if(document.documentElement.clientHeight-img.offsetTop<=img.offsetHeight+20){
+                         clearInterval(img.id);//清除定时器
+                         arrWords.shift();//移出不在页面中的字母
+                         document.body.removeChild(img);
+                         //扣分
+                         if(count<0){
+                             console.log("游戏结束");
+                         }else{
+                             count-=20;
+                             document.getElementById("caleScore").innerHTML=count+"分";
+                         }
+                     }
+                     img.style.top=(nextTop+10)+"px";
+                 },100,arrWords[i]);
+             }
+             this.src="game/pauseGame.png";
+         }
+         pauseOrContinueGameFlag=!pauseOrContinueGameFlag;
+
+     },false);
+
+     //计分板
+     function caleScoreWood(){
+         var div =document.createElement("div");
+         div.id="caleScore";
+         div.style.width=123+"px";
+         div.style.height=195+'px';
+         div.style.position="absolute";
+         div.style.bottom=17+"px";
+         div.style.right=30+"px";
+         div.style.fontWeight="bold";
+         div.style.color="green";
+         div.style.backgroundImage="url(game/score.png)";
+         div.style.textAlign="center";
+         div.innerHTML=0+"分";
+         div.style.lineHeight=150+"px";
+         document.body.appendChild(div);
+
+     }
+
+
+     document.addEventListener("contextmenu",function(e){
+         e.preventDefault();//阻止浏览器默认的事件行为
+
+         console.log(e);
+
+         var  style= document.getElementById("menu").style;
+         style.left=e.clientX+"px";
+         style.top=e.clientY+"px";
+         style.display="block";
+
+     },false);
+
+
+
+        document.addEventListener("click",function(e){
+            var  style= document.getElementById("menu").style;
+            style.display="none";
+        },false);
+
+
+
+
+
+    }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Node节点属性和方法练习</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        ul{list-style: none}
+        ul>li{
+            margin: 10px;
+            padding: 5px 10px ;
+        }
+        ul#menu>li:nth-of-type(2n){
+
+          background-color: grey;
+          color: #fff;
+        }
+        ul#menu>li:nth-of-type(2n+1){
+            background-color: darkgray;
+            color: #fff;
+        }
+
+        #replaceMenu>li{
+            background-color: green;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+             <ul class="list-group" id="menu">
+                 <li>菜单1</li>
+                 <li>菜单2</li>
+                 <li>菜单3</li>
+             </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li><button type="button" class="btn btn-primary btn-sm">修改第一个菜单的的文本为："修改后的第一个菜单"</button><span class="label label-default">知识点：firstNode&textContent&nodeType</span></li>
+                <li><button type="button" class="btn btn-primary btn-sm">修改最后一个菜单的的文本为："修改后的最后一个菜单"</button><span class="label label-default">知识点：lastNode&textContent&nodeType</span></li>
+                <li><button type="button" class="btn btn-success btn-sm">末尾位置添加一个菜单</button><span class="label label-default">知识点：appendChild()</span></li>
+                <li><button type="button" class="btn btn-success btn-sm">开始位置添加一个菜单</button><span class="label label-default">知识点：insertBefore()</span></li>
+                <li><input placeholder="自定义文本" class="form-control" type="text"><button type="button" class="btn btn-success btn-sm">末尾位置添加一个自定义名字的菜单</button><span class="label label-default">知识点：appendChild()&textContent&node.value</span></li>
+                <li><button type="button" class="btn btn-danger btn-sm">末尾位置删除一个菜单</button><span  class="label label-default">知识点：removeChild()</span></li>
+                <li><button type="button" class="btn btn-danger btn-sm">删除所有菜单</button><span  class="label label-default">知识点：removeChild()&&hasChildNodes()</span></li>
+                <li><button type="button" class="btn btn-info btn-sm">把上面菜单删除，替换成下面的备用菜单</button><span  class="label label-default">知识点：replaceChild()</span></li>
+                <li><button type="button" class="btn btn-info btn-sm">统计菜单个数(不包含文本)</button><span  class="label label-default">知识点：childNodes&&nodeType</span></li>
+                <li><button type="button" class="btn btn-info btn-sm">把第一个菜单的下一个兄弟菜单文本修改为："我是第一个菜单的下一个兄弟菜单"</button><span  class="label label-default">知识点：nextSibling</span></li>
+                <li><button type="button" class="btn btn-info btn-sm">把最后一个菜单的上一个兄弟菜单文本修改为："我是最后一个菜单的上一个兄弟菜单"</button><span  class="label label-default">知识点：previousSibling</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-group" id="replaceMenu">
+                <li>备用菜单1</li>
+                <li>备用菜单2</li>
+                <li>备用菜单3</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+    function highSearch() {
+        var search1 = document.getElementById("search2-btn");
+        search1.onclick = function () {
+            var value = search1.nextElementSibling.value;
+            var table = document.getElementsByTagName("table")[0];
+            var row = table.tBodies[0].rows;
+            var arr = [];
+            for (var i = 0; i < row.length; i++) {
+                var cellText = row[i].cells[1].innerHTML;
+                if (cellText.indexOf(value) != -1) {
+                    arr.push(row[i]);
+                }
+            }
+            while (table.tBodies[0].rows.length > 0) {
+                table.tBodies[0].deleteRow(0);
+            }
+
+            for (var j = 0; j < arr.length; j++) {
+                var newText = arr[j].cells[1].innerHTML.replace(value, "<span style='color: red'>" + value + "</span>");
+                arr[j].cells[1].innerHTML = newText;
+                table.tBodies[0].appendChild(arr[j]);
+            }
+
+        }
+    }
+
+</script>
+
+
+</body>
+</html>

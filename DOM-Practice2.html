@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM综合练习</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="username" class="col-md-1 control-label">姓名</label>
+                    <div class="col-md-11">
+                        <input type="text" class="form-control" id="username" autocomplete="false" placeholder="请输入3-4位中文名字">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="age" class="col-md-1 control-label">年龄</label>
+                    <div class="col-md-11">
+                        <input type="text" class="form-control" id="age" autocomplete="false" placeholder="请输入1-120之间年龄">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="search1-btn" style="cursor: pointer">普通搜索</span>
+                            <input type="text" class="form-control" id="search1" autocomplete="false" placeholder="请输入姓名关键字,把搜索到的内容对应行变成红色">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="search2-btn" style="cursor: pointer">高级搜索</span>
+                            <input type="text" class="form-control" id="search2" autocomplete="false" placeholder="请输入姓名关键字,把搜索到的内容变成红色,并去掉未匹配的行">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-success btn-sm">末尾添加一行</button>
+            <button type="button" class="btn btn-danger btn-sm">末尾删除一行</button>
+            <button type="button" class="btn btn-info btn-sm">奇数行变成灰色</button>
+            <button type="button" class="btn btn-primary btn-sm">按编号从大到小排序</button>
+            <button type="button" class="btn btn-primary btn-sm">按年龄从小到大排序</button>
+            <div class="input-group" style="margin-top: 10px;margin-bottom: 10px">
+                <span class="input-group-addon"  style="cursor: pointer">切换主题</span>
+                <select class="form-control">
+                    <option value="table table-bordered">--默认主题--</option>
+                    <option value="table">--简易风--</option>
+                    <option value="table table-hover">--悬停风--</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>
+                        <button type="button" class="btn btn-default btn-sm">全选</button>
+                        <button type="button" class="btn btn-default btn-sm">取消全选</button>
+                        <button type="button" class="btn btn-default btn-sm">反选</button>
+                        <button type="button" class="btn btn-default btn-sm">删除选中</button>
+                    </th>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox" name="checkRow"></td>
+                    <td>1</td>
+                    <td>张三</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="checkRow"></td>
+                    <td>2</td>
+                    <td>李四</td>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="checkRow"></td>
+                    <td>3</td>
+                    <td>王五</td>
+                    <td>19</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin: 10px 0"><span class="label label-default">切换主题知识点：</span><span class="label label-danger">element.classList=>add()|remove()</span></div>
+            <div style="margin: 10px 0"><span class="label label-default">搜索知识点：</span><span class="label label-danger">string.replace()&&string.indexOf()</span></div>
+            <div style="margin: 10px 0"><span class="label label-default">全选|全不选(考察标准属性)：</span><span class="label label-danger">input.checked=true | input.checked=true</span></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
