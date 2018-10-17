@@ -119,3 +119,43 @@ Math.max.apply(null,[1,2,3,4]); //null,undefind ==>指的是window
  zhangsan.toString();//调用了原型对象[new Array()]的原型对象[Array.prototype]的原型对象[Object.prototype]上的toString方法
 ```
 
+* 所有的函数都是Function的实例对象（Math除外，它不是函数）
+
+```javascript
+  console.log(Function.prototype===Array.__proto__);
+  console.log(Function.prototype===Math.__proto__); //false
+  console.log(Function.prototype===Object.__proto__);
+  console.log(Function.prototype===Date.__proto__);
+```
+
+* 原型对象上有一个属性constructor，指向生成它的构造函数
+* 只有函数才有prototype属性，Object,Function,Array等都是函数
+* 所有的函数都是实例对象，函数都是由构造函数Function创建的实例,每一个实例对象都有__proto__属性
+* Function自己创建自己（Function.__proto__===Function.prototype）
+* 继承:把父的构造函数属性和原型上方法都继承下来，子的构造函数定义的时候不用重复再写一遍，但是能够使用父的属性和原型上方法
+
+```javascript
+function Persion(name,age){
+           this.name=name;
+           this.age=age;
+    }
+    Persion.prototype.speak=function(){
+           console.log("my name is"+this.name);
+    }
+    Persion.prototype.sleep=function(){
+    console.log("zzZZZ");
+}
+
+    function ChinaPersion(name,age){
+        Persion.call(this,name,age);//把父的属性拷贝过来
+    }
+    ChinaPersion.prototype= new Persion();//继承第二步
+    //ChinaPersion.prototype= Object.create(Persion.prototype);
+    ChinaPersion.prototype.constructor=ChinaPersion;//构造函数重新指向
+
+    var  zs = new ChinaPersion("张三",18);
+    console.log(zs);
+    zs.sleep();//my name is张三
+    zs.speak();//zzZZZ
+```
+

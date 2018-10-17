@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇游戏</title>
+    <style>
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        body{
+            background-image: url('images/practice8/bg.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+             //公共构造函数
+             function Base(options) {
+                 this.width =options.width ||20; //每一个格子宽度
+                 this.height=options.height||20;//每一个格子高度
+                 this.mainWidth=document.documentElement.clientWidth;//容器总宽度
+                 this.mainHeight=document.documentElement.clientHeight;//容器总高度
+                 this.sizeX=this.mainWidth/this.width;  //水平方向格子数
+                 this.sizeY=this.mainHeight/this.height;//垂直方向格子数
+             }
+             //Base的原型方法：用于生成[0-number)之间的随机数
+             Base.prototype.random=function(number){
+                 return  Math.floor(Math.random()*number);
+             }
+             //创建DOM节点
+             Base.prototype.createDOM=function(imgUrl){
+                 var tempDOM= document.createElement("div");
+                 tempDOM.style.width=this.width+"px";
+                 tempDOM.style.height=this.width+"px";
+                 tempDOM.style.position="absolute";
+                 tempDOM.style.backgroundImage="url("+imgUrl+")";
+                 tempDOM.style.backgroundSize="contain";
+                 document.body.appendChild(tempDOM);
+                 return  tempDOM;
+             }
+
+             //食物构造函数
+             function Food(options){
+                 Base.call(this,options);//继承Base构造函数上的属性
+                 this.dom =null; //食物DOM节点
+                 this.currentSizeX=0;//当前食物所在水平方向格子数
+                 this.currentSizeY=0;//当前食物所在垂直方向格子数
+                 this.init();  //调用食物初始化方法
+             }
+             Food.prototype=Object.create(Base.prototype);//Food构造函数的原型指向克隆的Base构造函数的原型
+             Food.prototype.constructor=Food; //原型重新指向Food构造函数，防止指向错乱
+             //食物初始化方法
+             Food.prototype.init=function(){
+                 if(this.dom==null){//dom没创建的是才创建
+                     this.dom = this.createDOM("images/practice8/food"+(this.random(20)+1)+".png");
+                 }
+                 this.currentSizeX=this.random(this.sizeX); //属性继承自Base构造函数
+                 this.currentSizeY=this.random(this.sizeY); //属性继承自Base构造函数
+                 this.dom.style.left=this.width*this.currentSizeX+"px";
+                 this.dom.style.top=this.width*this.currentSizeY+"px";
+                 this.dom.style.backgroundImage="url('images/practice8/food"+(this.random(20)+1)+".png')";
+             }
+
+             //蛇
+             function Snake(options,food){
+                 Base.call(this,options);
+                 this.food=food;//蛇的食物：定义的目的防止参数的多次传递
+                 this.direct="right";//蛇移动的初始方向
+                 this.body=[[2,0,"images/practice8/head-"+this.direct+".png",null],[1,0,"images/practice8/body"+(this.random(3)+1)+".png",null],[0,0,"images/practice8/body"+(this.random(3)+1)+".png",null]];//默认第一块为蛇头
+                 this.id=null;  //蛇移动定时计数器编号
+                 this.flag=true;//控制定时器和键盘事件监听只执行一次代码
+                 this.newBorn();
+             }
+             Snake.prototype=Object.create(Base.prototype);//Snake构造函数的原型指向克隆的Base构造函数的原型
+             Snake.prototype.constructor=Snake; //原型重新指向Snake构造函数，防止指向错乱
+             //蛇出生
+             Snake.prototype.newBorn=function(){
+                 for(var i=0;i<this.body.length;i++){
+                     if(this.body[i][3]==null){
+                         this.body[i][3] = this.createDOM(this.body[i][2]);
+                     }
+                     this.body[i][3].style.left=this.width*this.body[i][0]+"px";
+                     this.body[i][3].style.top=this.width*this.body[i][1]+"px";
+                     this.body[i][3].style.backgroundImage="url("+this.body[i][2]+")";
+                 }
+                 //蛇移动
+                 var that=this;
+                 if(this.flag){
+                     this.snakeKeyBordEventListener();//调用一次可以一直监听
+                     this.id= setInterval(function(){
+                         that.move();
+                     },200);
+                     this.flag=false;
+                 }
+             }
+             Snake.prototype.eattingFood=function(){
+                  if(this.body[0][0]==food.currentSizeX && this.body[0][1]==food.currentSizeY){
+                      //吃到食物,食物改变位置，蛇变长
+                      var tempBody=[];
+                      var size =this.body.length-1;
+                      tempBody.push(this.body[size][0],this.body[size][1],"images/practice8/body"+(this.random(3)+1)+".png",null);
+                      this.body.push(tempBody);
+                      this.food.init();
+                  }
+
+              }
+             Snake.prototype.snakeKeyBordEventListener=function () {
+                   var that =this;
+                   document.addEventListener("keyup",function(e){
+                       that.changeDirect(e.keyCode);
+                   },false);
+
+             }
+             //蛇移动方向改变的方法
+             Snake.prototype.changeDirect=function(code){
+                 switch(code){
+                     case 40:this.direct="down";break;
+                     case 38:this.direct="up";break;
+                     case 37:this.direct="left";break;
+                     case 39:this.direct="right";break;
+                 }
+             }
+             Snake.prototype.move=function(){
+                  //蛇身向蛇头移动一格
+                  var size= this.body.length-1;
+                  for(;size>0;size--){
+                      this.body[size][0]=this.body[size-1][0];//移动left格子数;
+                      this.body[size][1]=this.body[size-1][1];//移动top格子数
+                  }
+                  //蛇头自己向前移动一格
+                 switch (this.direct){
+                     case "right":this.body[0][0] +=1;break;
+                     case "left" :this.body[0][0] -=1;break;
+                     case "down" :this.body[0][1] +=1;break;
+                     case "up"   :this.body[0][1] -=1;break;
+                 }
+                 this.body[0][2]="images/practice8/head-"+this.direct+".png";//改变头的方向
+                 this.eattingFood(this.food);
+                 this.newBorn(this.food);
+             }
+
+             var food =new Food({width:29,height:29});
+             //食物对象和蛇对象间的通信
+             new Snake({width:29,height:29},food);
+
+              /**
+               * 补充作业：
+               * 1.撞墙就结束游戏
+               * 2.撞身体游戏结束
+               * 3.统计得分，每种食物分数不一样
+               * 4.身体部分随机生成颜色
+               * 5.头的方向随着方向变而变动
+               * 6.开始游戏
+               * 7.暂停游戏
+               */
+
+    </script>
+
+
+
+</body>
+</html>

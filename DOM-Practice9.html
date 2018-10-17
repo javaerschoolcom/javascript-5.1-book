@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象入门案例</title>
+    <style>
+        div{
+            background-image: url("images/practice9/bird.png");
+            width: 163px;
+            height: 133px;
+            position: absolute;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    /**
+     *  初识面向对象编程
+     *  第一步.创建一只鸟,点击一下拍一下翅膀,
+     *  第二步.鸟会自动飞,
+     *  第三步.鸟会从容器右侧飞到左侧,
+     *  第四步.多只鸟不同速度从容器右侧飞到左侧,
+     *  第五步.点击每只鸟,会停止飞
+     *
+     */
+
+    //面向对象写--写起来很复杂，复用比较容易
+    //普通写法 --写起来简单，复用比较弱
+    function BornBird(status,speed){
+        this.status=status || 0;
+        this.dom= document.createElement("div");
+        this.dom.style.right=0+"px";
+        this.speed=speed || 40;
+        this.fly=function(){
+            this.status++;
+            if(this.status>2){
+                this.status=0;
+            }
+            this.dom.style.backgroundPosition="0 "+(-133*_this.status)+"px";
+            this.dom.style.right=parseInt(this.dom.style.right)+this.speed+"px";
+        };
+        var _this=this;//必须掌握
+        /* this.dom.onclick=function(){
+             _this.status++;
+             if(_this.status>2){
+                 _this.status=0;
+             }
+             this.style.backgroundPosition="0 "+(-133*_this.status)+"px";
+         };*/
+        this.id=setInterval(function(){
+            _this.fly(); //关键点
+        },100);
+
+        this.dom.onclick=function(){
+            clearInterval(_this.id);
+        };
+        document.body.appendChild(this.dom);
+    }
+    for(var i=0;i<10;i++){
+        new BornBird(Math.floor(Math.random()*3),Math.floor(Math.random()*100));
+    }
+
+</script>
+</body>
+</html>

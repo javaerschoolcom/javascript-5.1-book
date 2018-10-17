@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时器练习-用图片展示当前时间</title>
+</head>
+<body>
+
+<div style="margin: 0 auto;width: 250px;background-color: darkcyan;text-align: center">
+    <img src="images/practice10/0.png">
+    <img src="images/practice10/0.png">
+    &nbsp;&nbsp;
+    <img src="images/practice10/0.png">
+    <img src="images/practice10/0.png">
+    &nbsp;&nbsp;
+    <img src="images/practice10/0.png">
+    <img src="images/practice10/0.png">
+</div>
+
+
+<script>
+
+    var time = setInterval(function(){
+        var  now = new Date();
+        var hours =now.getHours();
+        var minute=now.getMinutes();
+        var second=now.getSeconds();
+
+        function changeTime(source){
+            if(source<10){
+                return ""+0+source;
+            }else{
+                return source+"";
+            }
+
+        }
+        now = changeTime(hours)+changeTime(minute)+changeTime(second);
+        if(now=="160130"){
+            clearInterval(time);
+        }
+
+
+        var imgs = document.getElementsByTagName("img");
+        for(var i=0;i<imgs.length;i++){
+            imgs[i].src="images/practice10/"+now.charAt(i)+".png";
+        }
+    },1000);
+
+    /**
+     * 补充作业：
+     *
+     *  1.用图片设计一个每次刷新都重新倒计时1分钟
+     *  2.用图片设计一个到天猫双十一的倒计时
+     */
+
+</script>
+</body>
+</html>
