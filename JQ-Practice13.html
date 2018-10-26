@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品图片预览</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+        .produce-sm{
+            list-style: none;
+            width: 370px;
+            margin: 5px auto;
+            border:1px solid #ddd;
+            padding: 2px;
+        }
+        .produce-sm:after{
+            display: block;
+            content: "";
+            clear: both;
+        }
+        .produce-sm li{
+            float: left;
+            border:none;
+
+        }
+        .produce-lg{
+            border:1px solid #ddd;
+            overflow: hidden;
+            height: 520px;
+        }
+        .produce-lg img{
+            display: block;
+            margin: 0 auto;
+            overflow: hidden;
+            float: left;
+        }
+
+        .produce-md{
+            border:1px solid #ddd;
+        }
+        .produce-md img{
+            display: block;
+            height: 430px;
+            margin: 0 auto;
+        }
+        .produce-container{
+            position: relative;
+        }
+
+        .active{
+            border: 2px solid red !important;
+            background-color: transparent !important;
+            border-radius: 3px;
+        }
+        .zoom-pup{
+           position: absolute;
+           width: 100%;
+           height: 100%;
+           top: 0;
+           left:0;
+        }
+        .zoom-pup:hover{
+            cursor: move;
+        }
+        .lg-disable{
+            display: none;
+        }
+        .produce-magnifier{
+            position: absolute;
+            display: none;
+            width: 200px;
+            height: 200px;
+            left:0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row" >
+        <div class="col-xs-1  col-md-0"></div>
+        <div class="col-xs-10 col-md-12">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <div class="row" >
+                        <div class="col-md-2"><img src="images/practice13/logo.jpg" style="height: 24px"></div>
+                        <div class="col-md-8"><h3 class="panel-title" style="text-align: center">商品图片预览</h3></div>
+                        <div class="col-md-2"></div>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                             <div class="produce-container">
+                                 <div class="produce-magnifier">
+                                     <img src="images/practice13/zoom_pup.png">
+                                 </div>
+                                 <div class="produce-md">
+                                     <img src="images/practice13/iphone0-md.jpg">
+                                 </div>
+                                 <div class="zoom-pup"></div>
+                             </div>
+
+                             <div>
+                                 <ul class="list-group  produce-sm">
+                                     <li class="list-group-item active"><img src="images/practice13/iphone0-sm.jpg"></li>
+                                     <li class="list-group-item"><img src="images/practice13/iphone1-sm.jpg"></li>
+                                     <li class="list-group-item"><img src="images/practice13/iphone2-sm.jpg"></li>
+                                     <li class="list-group-item"><img src="images/practice13/iphone3-sm.jpg"></li>
+                                 </ul>
+                             </div>
+
+                        </div>
+                        <div class="col-md-7">
+                            <div class="produce-lg lg-disable">
+                                <img src="images/practice13/iphone0-lg.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel-footer" style="text-align: center">--展谊科技出品--</div>
+            </div>
+        </div>
+        <div class="col-xs-1  col-md-0"></div>
+
+    </div>
+</div>
+
+<script>
+
+    $(function(){
+
+          var $list_sm= $(".produce-sm");//小图容器集合 ul-li
+          var $list_md= $(".produce-md");//中图容器集合 div-img
+          var $list_lg= $(".produce-lg");//大图容器结合 div-img
+          var $zoom_pup= $(".zoom-pup"); //获取遮罩
+          var $magnifier= $(".produce-magnifier");//获取放大镜
+
+
+          $list_sm.children().on("mouseenter",function(){
+              $(this).addClass("active").siblings().removeClass("active");
+              var index = $(this).index();
+              $list_md.children("img").eq(0).attr("src",function(){
+                  return  "images/practice13/iphone"+(index)+"-md.jpg";
+              })
+              $list_lg.children("img").eq(0).attr("src",function(){
+                  return  "images/practice13/iphone"+(index)+"-lg.jpg";
+              })
+          });
+
+          $zoom_pup.on("mouseenter",function(){
+              $list_lg.show();
+              $magnifier.show();
+          });
+
+          $zoom_pup.on("mouseleave",function(){
+              $list_lg.hide();
+              $magnifier.hide();
+          });
+
+          $zoom_pup.on("mousemove",function(e){
+              console.log(e.offsetX);
+              var left = e.offsetX - ($magnifier.outerWidth()/2);
+              left = left>0?left:0;
+              left =left>(parseInt($zoom_pup.outerWidth())-parseInt($magnifier.outerWidth()))?(parseInt($zoom_pup.outerWidth())-parseInt($magnifier.outerWidth())):left;
+
+              var top =e.offsetY -($magnifier.outerHeight()/2);
+              top = top >0?top:0;
+              top = top>(parseInt($zoom_pup.outerHeight())-parseInt($magnifier.outerHeight()))?(parseInt($zoom_pup.outerHeight())-parseInt($magnifier.outerHeight())):top;
+
+              $magnifier.css("left",left+"px");
+              $magnifier.css("top",top+"px");
+
+              var $lg_img = $list_lg.eq(0).children("img:first");
+              var leftRate = left / parseInt($zoom_pup.outerWidth());
+
+              var bigLeft = leftRate * parseInt($lg_img.outerWidth());
+              $lg_img.css('margin-left', -bigLeft + 'px');
+
+              var topRate = top / parseInt($zoom_pup.outerHeight());
+              var bigTop =  topRate * parseInt($lg_img.outerHeight());
+              $lg_img.css('margin-top', -bigTop + 'px');
+
+
+          });
+
+
+      })
+
+</script>
+
+
+</body>
+</html>

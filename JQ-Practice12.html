@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQ轮播图练习</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+        .banner{
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 2px;
+        }
+        .panel-body{
+            position: relative;
+        }
+        .arrow{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: darkolivegreen;
+        }
+        .arrow:hover{
+            cursor: pointer;
+        }
+        .left{
+             left:5px;
+         }
+
+        .right{
+            right: 5px;
+        }
+        .active{
+            background-color: orangered !important;
+        }
+
+        .banner-container{
+            background-image: url(images/practice12/snowblackboard.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            max-width: 100%;
+            height: 100%;
+        }
+        .list-group-item{
+            padding: 15px 30px;
+            background-color: transparent;
+            border: none;
+        }
+        .carousel{
+        }
+        .carousel ul{
+            position: relative;
+            text-align: center;
+            padding-top: 5px;
+            width: 120px;
+            left: 50%;
+            margin-left: -60px;
+        }
+        .carousel ul:after{
+            display: block;
+            content: "";
+            clear: both;
+        }
+        .carousel li{
+            position: relative;
+            list-style: none;
+            margin-right:10px;
+            float: left;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color:darkolivegreen;
+
+        }
+        .carousel li:hover{
+            cursor: pointer;
+        }
+
+        .banner-active{
+            display: block;
+        }
+        .banner-hide{
+            display: none;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row" >
+        <div class="col-xs-1  col-md-0"></div>
+        <div class="col-xs-10 col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row" >
+                        <div class="col-md-2"><img src="images/practice12/logo.jpg" style="height: 24px"></div>
+                        <div class="col-md-8"><h3 class="panel-title" style="text-align: center">轮播图</h3></div>
+                        <div class="col-md-2"></div>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <div class="arrow left"><span class="glyphicon glyphicon-chevron-left"></span></div>
+                        <div class="arrow right"><span class="glyphicon glyphicon-chevron-right"></span></div>
+                    </div>
+                    <div class="banner-container">
+                        <ul class="list-group">
+                            <li class="list-group-item banner-active">
+                                <a href="#"><img class="banner" src="images/practice12/banner1.png"></a>
+                            </li>
+                            <li class="list-group-item banner-hide">
+                                <a href="#"><img class="banner" src="images/practice12/banner2.png"></a>
+                            </li>
+                            <li class="list-group-item banner-hide">
+                                <a href="#"><img class="banner" src="images/practice12/banner3.png"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="carousel">
+                        <ul>
+                            <li class="active"></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+                <div class="panel-footer" style="text-align: center">--展谊科技出品--</div>
+            </div>
+        </div>
+        <div class="col-xs-1  col-md-0"></div>
+
+    </div>
+</div>
+
+<script>
+
+    /**
+     * 轮播图：各大商家|各大直播平台|各大视频平台===>活动宣传
+     *
+     * 实现方式 无穷多种 |左右滑动|上下滑动|淡入淡出
+     *
+     * 思路：淡入淡出  定时器|清除定时器
+     *
+     *
+     *
+     *
+     *
+     *
+     */
+
+</script>
+
+
+</body>
+</html>

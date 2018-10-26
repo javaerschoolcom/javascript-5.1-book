@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品星级评分</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+        .star {
+            position: relative;
+            height: 19.9px;
+            width: 116px;
+            /*  border: 1px solid red;*/
+            background-image: url("images/practice14/star_small.gif");
+            background-repeat: no-repeat;
+            background-position: 0px -79.6px;
+        }
+        .tips{
+            position: relative;
+            width: 116px;
+            height: auto;
+            padding: 5px;
+            border:1px solid orangered;
+            top:30px;
+            border-radius: 5px;
+            background-color: orangered;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+        }
+        .tips:after{
+            display: block;
+            content: "";
+            position:absolute;
+            border-left:10px solid transparent;
+            border-right:10px solid transparent;
+            border-bottom:10px solid orangered  ;
+            border-top:10px solid transparent ;
+            left:48px;
+            top:-20px;
+        }
+
+        .list-group-item>div{
+            margin: 10px;
+            float: left;
+        }
+        .list-group-item:after{
+            display: block;
+            content: "";
+            clear: both;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row" >
+        <div class="col-xs-1  col-md-0"></div>
+        <div class="col-xs-10 col-md-12">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <div class="row" >
+                        <div class="col-md-2"><img src="images/practice14/logo.jpg" style="height: 24px"></div>
+                        <div class="col-md-8"><h3 class="panel-title" style="text-align: center">商品打分效果</h3></div>
+                        <div class="col-md-2"></div>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                              <h3></h3>
+                              <ul class="list-group">
+                                  <li class="list-group-item">
+                                      <div>我的评分：</div>
+                                      <div class="star">
+                                          <div class="tips">一般</div>
+                                      </div>
+                                      <div>您的评分：3分</div></li>
+                                  </li>
+                              </ul>
+                        </div>
+                        <div class="col-md-7">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer" style="text-align: center">--展谊科技出品--</div>
+            </div>
+        </div>
+        <div class="col-xs-1  col-md-0"></div>
+
+    </div>
+</div>
+
+<script>
+
+    $(function(){
+        var tips=["无视","极差","很差","差","偏差","一般","良好","很好","极好","完美"];
+        var score=["0.5分","1分","1.5分","2分","2.5分","3分","3.5分","4分","4.5","5分"];
+    })
+
+</script>
+
+
+</body>
+</html>

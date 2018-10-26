@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQ购物车练习</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+         .produce{
+             line-height: 64px;
+         }
+         .list-group-item{
+             text-align: center;
+         }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row" >
+        <div class="col-xs-1  col-md-0"></div>
+        <div class="col-xs-10 col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row" >
+                        <div class="col-md-2"><img src="images/practice11/logo.jpg" style="height: 24px"></div>
+                        <div class="col-md-8"><h3 class="panel-title" style="text-align: center">双11购物车</h3></div>
+                        <div class="col-md-2"></div>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row" >
+                                        <div class="col-md-4">
+                                            商品信息
+                                        </div>
+                                        <div class="col-md-2">
+                                            单价
+                                        </div>
+                                        <div class="col-md-2">
+                                            数量
+                                        </div>
+                                        <div class="col-md-2">
+                                            小计
+                                        </div>
+                                        <div class="col-md-2">
+                                            操作
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row" >
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-1 produce"><input checked type="checkbox" name="produce"></div>
+                                                <div class="col-md-2">
+                                                    <img src="images/practice11/produce1.jpg" width="60px">
+                                                </div>
+                                                <div class="col-md-8 produce">
+                                                    小米Pro15.6吋1050
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥6299
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                1
+                                            </div>
+                                            <div class="col-md-4">
+                                                 <span class="glyphicon glyphicon-plus"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥6299
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div><button type="button" class="btn btn-danger">删除</button></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row" >
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-1 produce"><input  checked type="checkbox" name="produce"></div>
+                                                <div class="col-md-2">
+                                                    <img src="images/practice11/produce2.jpg" width="60px">
+                                                </div>
+                                                <div class="col-md-8 produce">
+                                                    小米8
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥2499
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                2
+                                            </div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥4998
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div><button type="button" class="btn btn-danger">删除</button></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row" >
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-1 produce"><input checked type="checkbox" name="produce"></div>
+                                                <div class="col-md-2">
+                                                    <img src="images/practice11/produce3.jpg" width="60px">
+                                                </div>
+                                                <div class="col-md-8 produce">
+                                                    雷蛇鼠标
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥159
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                1
+                                            </div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥159
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div><button type="button" class="btn btn-danger">删除</button></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row" >
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-1 produce"><input checked type="checkbox" name="produce"></div>
+                                                <div class="col-md-2">
+                                                    <img src="images/practice11/produce4.jpg" width="60px">
+                                                </div>
+                                                <div class="col-md-8 produce">
+                                                    雷蛇鼠标
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥165
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                1
+                                            </div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥165
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div><button type="button" class="btn btn-danger">删除</button></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row" >
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-1 produce"><input checked type="checkbox" name="produce"></div>
+                                                <div class="col-md-2">
+                                                    <img src="images/practice11/produce5.jpg" width="60px">
+                                                </div>
+                                                <div class="col-md-8 produce">
+                                                    三星LED背光液晶显示器
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥2799
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                1
+                                            </div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            ￥2799
+                                        </div>
+                                        <div class="col-md-2 produce">
+                                            <div><button type="button" class="btn btn-danger">删除</button></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="list-group-item">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row" >
+                                        <div class="col-md-4">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" checked value="all"> 全选
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="reverse-all"> 反选
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" value="cancel-all"> 全不选
+                                            </label>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div>已选择<span style="color: red;font-weight: bold">5</span>件商品</div>
+                                            <div style="color:grey;">共计<span>5</span>件商品</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div>应付总额：￥<span style="color: red;font-weight: bold">14420</span></div>
+                                            <div style="color:grey;">应付总额不含运费</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div><button type="button" class="btn btn-danger">去结算</button></div>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+
+                <div class="panel-footer" style="text-align: center">--展谊科技出品--</div>
+            </div>
+        </div>
+        <div class="col-xs-1  col-md-0"></div>
+
+    </div>
+</div>
+</body>
+</html>
