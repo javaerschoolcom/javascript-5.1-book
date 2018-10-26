@@ -70,33 +70,8 @@
 </div>
 
 
-
 <script>
-    function highSearch() {
-        var search1 = document.getElementById("search2-btn");
-        search1.onclick = function () {
-            var value = search1.nextElementSibling.value;
-            var table = document.getElementsByTagName("table")[0];
-            var row = table.tBodies[0].rows;
-            var arr = [];
-            for (var i = 0; i < row.length; i++) {
-                var cellText = row[i].cells[1].innerHTML;
-                if (cellText.indexOf(value) != -1) {
-                    arr.push(row[i]);
-                }
-            }
-            while (table.tBodies[0].rows.length > 0) {
-                table.tBodies[0].deleteRow(0);
-            }
 
-            for (var j = 0; j < arr.length; j++) {
-                var newText = arr[j].cells[1].innerHTML.replace(value, "<span style='color: red'>" + value + "</span>");
-                arr[j].cells[1].innerHTML = newText;
-                table.tBodies[0].appendChild(arr[j]);
-            }
-
-        }
-    }
 
 </script>
 

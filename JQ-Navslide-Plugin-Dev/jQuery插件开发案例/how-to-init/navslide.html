@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="navslide.css">
+    <style>
+        #app {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="jquery.navslide.js"></script>
+    <script>
+        //调用
+        $('#app').navslide({
+            data: [
+
+                {
+                    'text': '新闻',
+                    'value': 'xinwen'
+                },
+                {
+                    'text': '社会趣闻',
+                    'value': 'shehuiquwen',
+                    // 'isActive': true
+
+                },
+                {
+                    'text': '视频',
+                    'value': 'shipin'
+                },
+                {
+                    'text': '新农村',
+                    'value': 'xinongcun'
+                }
+            ],
+            onBeforeClick: function() {
+                console.log(this.$activeItem.html());
+            },
+            onClick: function() {
+                console.log(this.$activeItem.html());
+            }
+        });
+    </script>
+</body>
+
+</html>
