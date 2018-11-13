@@ -311,6 +311,8 @@ var year= prompt("请输入一个四位数年份：");
     }
 ```
 
+* 求任意一个三位数各个位数加起来的和
+
 * switch分支结构
   * 如果条件是有穷可列举推荐使用switch,若果条件是在一个范围内，推荐使用if
   * 表达式值是恒等的关系，类型要一致
@@ -621,7 +623,7 @@ var arr =[];
     alert("1-100之间的整数，不能被3整除或者不能被5的整除的数有"+arr);
 ```
 
-* 分别输入2个正整数，求两个数的最小公倍数
+* 分别输入2个正整数，求两个数的最小公约数
 
 ```javascript
  var x= prompt("请输入第一个正整数：");
@@ -631,21 +633,21 @@ var arr =[];
     y =parseInt(y);
 
     var min = (x-y)>0?x:y; //求输入两个数最小的数
-    var flag=false;  //假设不存在最小公倍数
-    var numer=0;  //存储最小公倍数
+    var flag=false;  //假设不存在最大公约数
+    var numer=0;  //存储最大公约数
 
     for(var i=2;i<=min;i++){
       if(x%i==0 && y%i==0){
           numer=i;
-          flag=!flag;  //存在最小公倍数
+          flag=!flag;  //存在最大公约数
           break;
 
       }
     }
     if(flag){
-        alert(x+","+y+"存在最小共倍数是:"+numer);
+        alert(x+","+y+"存在最大公约数是:"+numer);
     }else{
-        alert(x+","+y+"不存在最小共倍数");
+        alert(x+","+y+"不存在最大公约数");
     }
 ```
 

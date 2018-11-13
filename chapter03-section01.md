@@ -251,7 +251,7 @@ var student1={
     arr =[student1,student2,student3,student4];
 
    var xx= function(x,y){
-        return x.age==y.age?x.score>x.score:x.age>y.age;
+        return x.age==y.age?x.score>y.score:x.age>y.age;
    }
 
    var result=arr.sort(xx);
@@ -362,3 +362,159 @@ var result =arr2.every(function (value, index, array) {
     console.log(result);//55
 ```
 
+#####  综合练习:学生信息管理系统
+
+```javascript
+
+      var account = [{"name":"lero","password":"666","loginCount":0},{"name":"lisi","password":"111","loginCount":0}];
+
+       var studentInfo=[];//存放学生信息的数组
+
+
+       alert("欢迎登录学习信息管理系统");
+
+       function login() {
+
+           while(true){
+
+               var name = prompt("请输入你的账号");
+               var password= prompt("请输入你的密码");
+
+
+               //禁用账号
+               var isStop = account.some(function (value, index, array) {
+
+                   if(value.loginCount==3 && value.name==name){
+                       return true ;
+                   }else{
+                       return false ;
+                   }
+               })
+
+               //正确的账号
+               var isOK = account.some(function (value, index, array) {
+
+                    if(value.name==name && value.password==password){
+                        value.loginCount=0;
+                        return true ;
+                    }else{
+                        return false ;
+                    }
+               })
+
+               //账号正确，密码错误
+               var isPasswordError = account.some(function (value, index, array) {
+
+                   if(value.name==name && value.password!=password){
+                        if(value.loginCount<3){
+                            value.loginCount++;
+                        }
+                       return true ;
+                   }else{
+                       return false ;
+                   }
+               })
+               //账号不存在
+               var isAccountNotExist = account.some(function (value, index, array) {
+
+                   if(value.name==name ){
+                       return true ;
+                   }else{
+                       return false ;
+                   }
+               })
+
+               if(isStop){
+                   alert("该账号今日已三次登录失败，已禁止登录");
+                   continue;
+               }
+
+               if(isOK){
+                   doJob();
+                   //处理业务
+                   continue;
+               }
+               if(!isAccountNotExist){
+                   alert("该账号不存在，请重新登录");
+                   continue;
+               }
+               if(isPasswordError){
+                   alert("密码错误，请重新登录");
+                   continue;
+               }
+
+           }
+
+       }
+       //处理登录
+       login();
+
+       //业务
+       doJob();
+
+       //添加学生
+
+       function add(){
+           var  studentName = prompt("请输入学生姓名：");
+           var  studentScore =prompt("请输入学生成绩：");
+           studentInfo.push({
+               studentName:studentName,
+               studentScore:studentScore
+           });
+           alert("添加学生【"+studentName+"】信息成功");
+       }
+
+       //查询学生
+       function query(){
+           var  studentName = prompt("请输入学生姓名：");
+
+           var  student =null;//假设存在查询的的学生
+
+           //是否存在查询的学生
+           var  isExistStudent = studentInfo.some(function (value) {
+               if(studentName==value.studentName){
+                   student=value;
+                   return true;
+               }else{
+                   return false;
+               }
+           })
+           if(isExistStudent){ //存在
+               alert("该学生的成绩为：【"+student.studentScore+"分】");
+
+           }else{
+               alert("该学生不存在！");
+           }
+       }
+
+       //查询所有学生成绩
+       function queryAll(){
+           var info ="";//展示信息
+           for(var i=0;i<studentInfo.length;i++){
+               info +='学生姓名：'+studentInfo[i].studentName+",成绩："+studentInfo[i].studentScore+"\n\r";
+           }
+           alert(info);
+
+       }
+
+       function doJob(){
+           while(true){
+               var sn = prompt("学习信息管理系统业务处理：\n\r 1.添加\n\r2.查询\n\r3.退出\n\r4.查询所有\n\r");
+               switch (sn){
+                   case "1":
+                       add();
+                       break;
+                   case "2":
+                       query();
+                       break;
+                   case "4":
+                       queryAll();
+                       break;
+                   case "3":
+                      return;
+               }
+           }
+       }
+
+
+```
