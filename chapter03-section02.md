@@ -130,7 +130,7 @@ match
 
 ```javascript
  var s='hello=xx&everyone=dd';
- result = s.replace("o");
+ result = s.match("o");
  console.log(result); //["o", index: 4, input: "hello=xx&everyone=dd", groups: undefined]
 ```
 
@@ -140,7 +140,7 @@ search
 
 ```javascript
  var s='hello=xx&everyone=dd';
- result = s.replace("o");
+ result = s.search("o");
  console.log(result,s); //4 hello=xx&everyone=dd
 ```
 
@@ -237,6 +237,13 @@ function getCount(str){
 parseUrl("http://www.zhanyisc.com?username=lero&age=18");
 ```
 
+* 给定一个字符串，判断该字符串是否只有字母组成
+* 给定一段字符串，把该字符串反转
+* 给定一个字符串，找出某个字符在该字符串中出现的次数
+* 传入任意字符串，统计字符串中的大写字母个数、小写字母个数、数字个数、其他字符个数
+* 给定一段英文，把每个单词的首字母变成大小再输出
+* 给定一个字符串http://www.zhanyisc.com?username=lero&age=18要求把参数截取并组装成对象表示 obj={username:"lero",age:18}
+* 给一段只有字母的字符串，统计该段中每个字符出现的频率
 
 
 

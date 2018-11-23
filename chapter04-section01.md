@@ -3,14 +3,14 @@
 ##### 什么是DOM
 
 * 一份HTML网页就是DOM,DOM是网页的抽象设计，JS通过操作DOM接口属性或者是方法，就能操作html页面中的内容。DOM叫做文档对象模型.
-* DOM的最小组成单元叫节点(Node),节点是一个抽象的概念,浏览器提过了Node顶级接口
+* DOM的最小组成单元叫节点(Node),节点是一个抽象的概念,浏览器提供了Node顶级接口
 * DOM组成分成7大类
   * Document:9:一份HTML构成的网页称作DOM
   * DocumentType:指的是HTML页面的文档声明
   * Element：1:指的是HTML页面中的元素如<head>,<body>
   * Attribute：2:指的是HTML页面中的属性
   * Text:3:指的是HTML页面的中文本
-  * Commit:指的是HTML页面中注释
+  * Comment:指的是HTML页面中注释
   * DocumentFragment:指的是HTML文档片段
 * DOM树指的是把HTML文档抽象成节点后，组成的结构想一颗倒立的树
 * DOM树的节点除了跟节点以外，都和其他有一种关系
@@ -22,7 +22,7 @@
 
 * nodeName：获取该节点的名称
 * nodeType:判断每个节点的类型
-* nodeValue:获取该节点的值(对Text,Commit有效)，其他节点都返回null
+* nodeValue:获取该节点的值(对Text,Comment有效)，其他节点都返回null
 * firstChild:获取当前节点的第一个子节点（可以获取文本或者注释节点），没有的话返回null
 * lastChild:获取当前节点的第一个子节点（可以获取文本或者注释节点），没有的话返回null
 * nextSibling:获取当前节点的下一个兄弟节点（可以获取文本或者注释节点）,没有的话返回null

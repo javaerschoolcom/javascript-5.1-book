@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-10" style="border-radius: 5px;height: 100px;border: #5751a4 solid 1px;position:relative;background-color: green">
             <img src="images/practice4/zhanyikeji.png" width="36px"  style="position: absolute;top:32px;left:0px" >
-            <img src="images/practice4/zhanyikeji.png" width="36px"  style="position: absolute;top:32px;left:0px" >
+           <!-- <img src="images/practice4/zhanyikeji.png" width="36px"  style="position: absolute;top:32px;left:0px" >-->
         </div>
     </div>
 
@@ -64,6 +64,87 @@
 
 </div>
 
+
+ <script>
+
+
+
+     function practice1(){
+         var  img = document.images[0];
+         var imgParentWidth=img.offsetParent.clientWidth;//大盒子宽度
+         var imgWidth =img.clientWidth; //小球宽度
+
+         var id =setInterval(function(){
+             var imgLeft = parseInt(img.style.left); //每次移动后小球当前的left值
+             var distance =imgParentWidth-imgWidth;//小球应该移动的总距离
+             if(distance<=imgLeft){
+                 clearInterval(id);
+                 return;
+             }
+             if(distance-imgLeft<10){ //总距离-小球当前的偏移量==剩下该移动的距离
+                 img.style.left = imgLeft+(distance-imgLeft)+"px";
+             }else{
+                 img.style.left = imgLeft+10 +"px";
+             }
+         },30);
+     }
+
+     document.getElementsByTagName("button")[0].onclick=function(){
+         practice1();
+     }
+
+
+
+     function practice5(){
+         var  img = document.images[4];
+         var imgParentWidth=img.offsetParent.clientWidth;//大盒子宽度
+         var imgWidth =img.clientWidth; //小球宽度
+
+         var id =setInterval(function(){
+             var imgLeft = parseInt(img.style.left); //每次移动后小球当前的left值
+             var distance =imgParentWidth-imgWidth;//小球应该移动的总距离
+             if(distance/2<=imgLeft){
+                 doCicle();
+                 clearInterval(id);
+                 return;
+             }
+             if(distance/2-imgLeft<10){ //总距离-小球当前的偏移量==剩下该移动的距离
+                 img.style.left = imgLeft+(distance/2-imgLeft)+"px";
+             }else{
+                 img.style.left = imgLeft+10 +"px";
+             }
+         },30);
+
+     }
+
+
+     function doCicle(){
+         var  img = document.images[4];
+         var  h=img.offsetParent.clientHeight;//大盒子高度
+         var imgOffTop = img.offsetTop*3;
+
+         var  r  = (h-imgOffTop)/2;// 小球运动半径
+
+         var initTop =img.offsetTop; //小球开始旋转的初始top位置
+         var initLeft=img.offsetLeft;//小球开始旋转的初始left位置
+
+         var  time =1;
+         setInterval(function () {
+             var  y =Math.sin(Math.PI/180*(-90+1*time))*r+initTop+r;
+             var  x =Math.cos(Math.PI/180*(-90+1*time))*r+initLeft;
+             img.style.top=y+"px";
+             img.style.left=x+"px";
+             time++;
+         },30)
+
+     }
+
+     document.getElementsByTagName("button")[4].onclick=function(){
+         practice5();
+     }
+
+
+ </script>
 
 
 </body>

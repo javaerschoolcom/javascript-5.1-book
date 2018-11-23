@@ -366,155 +366,166 @@ var result =arr2.every(function (value, index, array) {
 
 ```javascript
 
-      var account = [{"name":"lero","password":"666","loginCount":0},{"name":"lisi","password":"111","loginCount":0}];
+      var account=[{username:"lero",password:"666",loginCount:0},{username:"lily",password:"111",loginCount:0}];
 
-       var studentInfo=[];//存放学生信息的数组
+           //登录
+           function login(){
 
+               var username= prompt("请输入账号");
+               var password=prompt("请输入密码");
+               //登录成功的账号密码
+               var isSuccess=account.some(function (value, index, array) {
 
-       alert("欢迎登录学习信息管理系统");
-
-       function login() {
-
-           while(true){
-
-               var name = prompt("请输入你的账号");
-               var password= prompt("请输入你的密码");
-
-
-               //禁用账号
-               var isStop = account.some(function (value, index, array) {
-
-                   if(value.loginCount==3 && value.name==name){
-                       return true ;
+                   if(value.username ==username && value.password ==password){
+                        value.loginCount =0;
+                        return true;
                    }else{
-                       return false ;
+                       return false;
                    }
-               })
 
-               //正确的账号
-               var isOK = account.some(function (value, index, array) {
-
-                    if(value.name==name && value.password==password){
-                        value.loginCount=0;
-                        return true ;
-                    }else{
-                        return false ;
-                    }
-               })
-
+              })
                //账号正确，密码错误
-               var isPasswordError = account.some(function (value, index, array) {
-
-                   if(value.name==name && value.password!=password){
-                        if(value.loginCount<3){
-                            value.loginCount++;
-                        }
-                       return true ;
+               var isPasswordError=account.some(function (value, index, array) {
+                   if(value.username==username && value.password!=password){
+                       if(value.loginCount<3){
+                           value.loginCount++;
+                       }
+                       return true;
                    }else{
-                       return false ;
+                       return false;
                    }
                })
-               //账号不存在
-               var isAccountNotExist = account.some(function (value, index, array) {
-
-                   if(value.name==name ){
-                       return true ;
+               //账号不存在(isNotExistUsername==true)
+               var isNotExistUsername=account.every(function (value, index, array) {
+                   //zhangsang
+                   if(value.username!=username){
+                       return true;
                    }else{
-                       return false ;
+                       return false;
+                   }
+               })
+               //禁止登录
+               var isStopLogin=account.some(function (value, index, array) {
+                   if(value.username==username && value.loginCount==3){
+                       return true;
                    }
                })
 
-               if(isStop){
-                   alert("该账号今日已三次登录失败，已禁止登录");
-                   continue;
-               }
-
-               if(isOK){
-                   doJob();
-                   //处理业务
-                   continue;
-               }
-               if(!isAccountNotExist){
-                   alert("该账号不存在，请重新登录");
-                   continue;
+               if(isStopLogin){
+                   alert("该账号今日登录三次失败，禁止继续登录");
+                   return;
                }
                if(isPasswordError){
                    alert("密码错误，请重新登录");
-                   continue;
+                   return;
+               }
+               if(isNotExistUsername){
+                   alert("账号不存在，请重新登录");
+                   return;
+               }
+               if(isSuccess){
+                   alert("登录成功");
+                   //处理登录业务
+                   doJob();
                }
 
            }
 
-       }
-       //处理登录
-       login();
+          var studentInfo=[]; //存储学生信息
 
-       //业务
-       doJob();
+           //添加学生
+          function addStudent(){
+               var studentSn  = prompt("请输入学生的学号");
+               var studentName=  prompt("请输入学生的姓名");
+               var studentScore= prompt("请输入学生的成绩");
 
-       //添加学生
+               studentInfo.push({studentSn:studentSn,studentName:studentName,studentScore:studentScore});
+               alert("添加学生["+studentName+"]成功");
 
-       function add(){
-           var  studentName = prompt("请输入学生姓名：");
-           var  studentScore =prompt("请输入学生成绩：");
-           studentInfo.push({
-               studentName:studentName,
-               studentScore:studentScore
-           });
-           alert("添加学生【"+studentName+"】信息成功");
-       }
+          }
+          //查询学生
+          function query(){
+              var studentSn  = prompt("请输入学生的学号");
+              for(var i=0;i<studentInfo.length;i++){
+                  if(studentInfo[i].studentSn==studentSn){
+                      alert("学号为"+studentInfo[i].studentSn+"的学生信息为：\n"+"姓名："+studentInfo[i].studentName+"\n成绩："+studentInfo[i].studentScore);
+                      break;
+                  }
+              }
 
-       //查询学生
-       function query(){
-           var  studentName = prompt("请输入学生姓名：");
+          }
 
-           var  student =null;//假设存在查询的的学生
+          //查询所有
+          function queryAll(){
+              var info="";
+              for(var i=0;i<studentInfo.length;i++){
+                info+="学号:"+studentInfo[i].studentSn+"  姓名:"+studentInfo[i].studentName+" 成绩:"+studentInfo[i].studentScore+"\n";
 
-           //是否存在查询的学生
-           var  isExistStudent = studentInfo.some(function (value) {
-               if(studentName==value.studentName){
-                   student=value;
-                   return true;
-               }else{
-                   return false;
+              }
+              alert(info);
+          }
+
+
+           //退出系统
+          function  exitSys(){};
+
+          //删除学生
+          function  deleteStudent() {
+              var studentSn = prompt("请输删除的学号：");
+              for(var i=0;i<studentInfo.length;i++){
+                  if(studentInfo[i].studentSn==studentSn){
+                      alert("删除学号为"+studentSn+"的学生"+studentInfo[i].studentName);
+                      studentInfo.splice(i,1);
+                  }
+              }
+
+          }
+          //学生排序
+          function orderStudent() {
+              studentInfo.sort(function (a, b) {
+                  return b.studentScore-a.studentScore;
+              })
+              queryAll();
+          }
+
+            //处理业务
+          function doJob(){
+
+               while (true){
+
+                   var sn = prompt("登录系统成功\r\n1.添加学生\r\n2.查询学生\n3.查询所有\n4.退出登录\n5.退出系统\n6.删除学生\n7.学生排序");
+                   switch (sn){
+                       case "1" :
+                           //
+                           addStudent();
+                           break;
+                       case "2" :
+                           query();
+                           break;
+                       case "3" :
+                            queryAll();
+                           break;
+                       case "4" :
+                           return;
+                       case "5" :
+                           NotExitSys=false;//退出系统
+                           return;
+                       case "6" :
+                           deleteStudent();
+                          break;
+                       case "7" :
+                           orderStudent();
+                           break;
+                   }
+
                }
-           })
-           if(isExistStudent){ //存在
-               alert("该学生的成绩为：【"+student.studentScore+"分】");
 
-           }else{
-               alert("该学生不存在！");
+          }
+
+           var NotExitSys = true;//假设退出系统
+           while(NotExitSys){
+                login();
            }
-       }
-
-       //查询所有学生成绩
-       function queryAll(){
-           var info ="";//展示信息
-           for(var i=0;i<studentInfo.length;i++){
-               info +='学生姓名：'+studentInfo[i].studentName+",成绩："+studentInfo[i].studentScore+"\n\r";
-           }
-           alert(info);
-
-       }
-
-       function doJob(){
-           while(true){
-               var sn = prompt("学习信息管理系统业务处理：\n\r 1.添加\n\r2.查询\n\r3.退出\n\r4.查询所有\n\r");
-               switch (sn){
-                   case "1":
-                       add();
-                       break;
-                   case "2":
-                       query();
-                       break;
-                   case "4":
-                       queryAll();
-                       break;
-                   case "3":
-                      return;
-               }
-           }
-       }
 
 
 ```
