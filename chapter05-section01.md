@@ -52,3 +52,51 @@ window.f===f;//true
 * navigator对象:获取浏览器自身信息
   * navigator.user
 
+Cookie
+
+* 是客户端存储信息一种方法4KB，一个站点20个，一个浏览器300个左右，不同浏览器不能交叉使用
+* 用途1：记住登录|加入购物车
+* 用途2：聊天主题设置|皮肤设置|本地历史排行榜数据
+* 用途3：个性推荐
+* 缺点：不安全，用来存储不重要数据|启用需要浏览器启用
+* document.cookie:获取cookie,返回一个字符串
+
+```javascript
+//取cookie：
+document.cookie
+```
+
+* 添加cookie:默认的生命周期是浏览器从打开到关闭整个期间
+
+```javascript
+document.cookie="name1=lero";
+document.cookie="name2=lily";
+document.cookie="name3=lucy";
+
+//等价于
+document.cookie="name1=lero; name2=lily; name3=lucy";
+
+```
+
+* 设置cookie存在时间Max-age,单位是秒
+
+```javascript
+document.cookie="name1=lero; Max-age=10";//设置一个cookie 存在时间为10秒
+```
+
+* 删除cookie
+
+```javascript
+document.cookie="name1=lero; Max-age=0";//删除cookie
+```
+
+* cookie存中文记得编码
+
+```javascript
+var res =  encodeURI("你好"); //编码
+console.log(res);
+
+res  = decodeURI(res); //解码
+console.log(res);
+
+```
