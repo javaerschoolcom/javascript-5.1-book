@@ -56,3 +56,4 @@
     * [练习十五 JQ手风琴](JQ-Practice15.md)
     * [练习十六 JQ数据交互之AJAX](JQ-Practice16.md)
     * [练习十七 表单验证](JQ-PracticeN8.md)
+    * [练习十八 面向对象练习-人物运动](DOM-Practice9.md)

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            background-image: url("images/practice17/map.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        div{
+            width: 68px;
+            height: 100px;
+            background-image: url("images/practice17/person.png");
+            background-position: 0px -200px;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+    /**
+     * 1.创建一个人
+     * 2.人动作点击会切换
+     * 3.人会从屏幕一边跑到另一边
+     * 4.跑的过程点一下它，它就不动
+     * 5.创建很多人，每个人都有自己速度
+     *
+     * 面向对象： 写起来比较难，用起来比较方便
+     * 面向过程： 写起来比较简单，用来难以控制
+     *
+     */
+
+     function  Person(speed) {
+        var that =this;
+        this.status=0; //人物步行状态
+        this.body=document.body.appendChild(document.createElement("div"));
+        this.isStop=false; //人物是否暂停
+        this.body.onclick=function (ev) { //点击人物暂停，再次点击继续运动
+            if(!that.isStop){
+                clearInterval(that.id);
+            }else{
+                that.run();
+            }
+            that.isStop=!that.isStop;
+        };
+        this.speed=speed; //人物速速
+        this.id=null;     //人物运动定时器
+        this.run=function(){ //人物运动
+            that.changeStatus();
+            switch (this.direction){
+                case "left" :
+                    if(that.body.offsetLeft<=0){
+                        that.body.style.Left=0+"px";
+                        break;
+                    }
+                    that.body.style.left=that.body.offsetLeft-that.speed+"px";
+                    break;
+                case "right":
+
+                    if(that.body.offsetLeft>=(document.body.clientWidth-that.body.clientWidth-that.speed)){
+
+                        that.body.style.left=document.body.clientWidth-that.body.clientWidth+"px";
+                        break;
+                    }
+                    that.body.style.left=that.body.offsetLeft+that.speed+"px";
+                    break;
+                case "down" :
+                    if(that.body.offsetTop>(document.body.clientHeight-that.body.clientHeight-that.speed)){
+                        that.body.style.top=document.body.clientHeight-that.body.clientHeight+"px";
+                        break;
+                    }
+                    that.body.style.top=that.body.offsetTop+that.speed+"px";
+
+                    break;
+                case "up" :
+                    if(that.body.offsetTop<=0){
+                        that.body.style.top=0+"px";
+                        break;
+                    }
+                    that.body.style.top=that.body.offsetTop-that.speed+"px";
+                    break;
+            }
+        };
+        this.changeStatus=function(){ //切换人物运动状态
+            if(this.status>7){
+                this.status =0;
+            }
+            this.status ++;
+            switch (this.direction){
+                case "left" :
+                    this.body.style.backgroundPosition=-68*this.status+"px -100px";
+                    break;
+                case "right":
+                    this.body.style.backgroundPosition=-68*this.status+"px -200px";
+                    break;
+                case "down" :
+                    this.body.style.backgroundPosition=-68*this.status+"px 0px";
+                    break;
+                case "up" :
+                    this.body.style.backgroundPosition=-68*this.status+"px -300px";
+                    break;
+            }
+
+        };
+        this.direction="right"; //人物运动方向
+        this.init=function(){   //初始化对象调用
+            this.listenerDirect();
+        };
+        this.limit=function(fn, delay, atleast){//键盘事件防抖函数
+            var timer = null;
+            var previous = null;
+            return function () {
+                var now = +new Date();
+                if ( !previous ) previous = now;
+                if ( atleast && now - previous > atleast ) {
+                    fn();
+                    // 重置上一次开始时间为本次结束时间
+                    previous = now;
+                    clearTimeout(timer);
+                } else {
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        fn();
+                        previous = null;
+                    }, delay);
+                }
+            }
+        };
+
+        this.listenerDirect=function(){ //监听用户控制键盘方向
+            window.addEventListener("keydown",
+                that.limit(function(){
+                        switch (window.event.key){
+                            case "ArrowUp" : that.direction="up"; break;
+                            case "ArrowDown" :that.direction="down";break;
+                            case "ArrowLeft" :that.direction="left";break;
+                            case "ArrowRight":that.direction="right";break;
+                        }
+                        that.run();
+                },1000,80),false);
+        };
+        this.init();
+    }
+
+    var  persion= new Person(4);
+
+
+</script>
+
+
+</body>
+</html>
